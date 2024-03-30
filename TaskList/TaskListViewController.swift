@@ -6,12 +6,10 @@
 //
 
 import UIKit
-protocol NewTaskViewControllerDelegate: AnyObject {
-    func reloadData()
-}
+
 final class TaskListViewController: UITableViewController {
     private var taskList: [ToDoTask] = []
-    private let cellID = "cellID"
+    private let cellID = "task"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +20,7 @@ final class TaskListViewController: UITableViewController {
     }
     
     @objc private func addNewTask() {
-        let newTaskVC = NewTaskViewController()
-        newTaskVC.delegate = self
-        present(newTaskVC, animated: true)
+        showAlert(with: "New Task", andMessage: "What do you want to do?")
     }
     
     private func fetchData() {
@@ -32,14 +28,40 @@ final class TaskListViewController: UITableViewController {
         let fetchRequest = ToDoTask.fetchRequest()
         
         do {
-           taskList = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
+            taskList = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
         } catch {
             print(error)
         }
     }
+    private func showAlert(with title: String, andMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { [unowned self ]_ in
+            
+            guard let inputText = alert.textFields?.first?.text, !inputText.isEmpty else { return }
+            save(inputText)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        alert.addTextField { textField in
+            textField.placeholder = "New Task"
+        }
+        present(alert, animated: true)
+    }
+    private func save(_ taskName: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let task = ToDoTask(context: appDelegate.persistentContainer.viewContext)
+        task.title = taskName
+        taskList.append(task)
+        
+        let indexPath = IndexPath(row: taskList.count - 1, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        
+        appDelegate.saveContext()
+    }
 }
 
-//MARK: - UITableViewDataSourse
+//MARK: - UITableViewDataSource
 extension TaskListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         taskList.count
@@ -83,10 +105,4 @@ private extension TaskListViewController {
     }
 }
 
-//MARK: - NewTaskViewControllerDelegate
-extension TaskListViewController : NewTaskViewControllerDelegate {
-    func reloadData() {
-        fetchData()
-        tableView.reloadData()
-    }
-}
+
