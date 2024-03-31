@@ -13,7 +13,6 @@
 		2075C1D82BB5DACA004F56D2 /* TaskList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2075C1D62BB5DACA004F56D2 /* TaskList.xcdatamodeld */; };
 		2075C1DA2BB5DACC004F56D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2075C1D92BB5DACC004F56D2 /* Assets.xcassets */; };
 		2075C1DD2BB5DACC004F56D2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2075C1DC2BB5DACC004F56D2 /* Base */; };
-		2075C1E72BB5EAB9004F56D2 /* FilledButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2075C1E62BB5EAB9004F56D2 /* FilledButtonFactory.swift */; };
 		20F370BF2BB89E6700C85341 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F370BE2BB89E6700C85341 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +25,6 @@
 		2075C1D92BB5DACC004F56D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2075C1DC2BB5DACC004F56D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2075C1DE2BB5DACC004F56D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2075C1E62BB5EAB9004F56D2 /* FilledButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButtonFactory.swift; sourceTree = "<group>"; };
 		20F370BE2BB89E6700C85341 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,7 +61,6 @@
 				2075C1CD2BB5DACA004F56D2 /* AppDelegate.swift */,
 				2075C1CF2BB5DACA004F56D2 /* SceneDelegate.swift */,
 				2075C1D12BB5DACA004F56D2 /* TaskListViewController.swift */,
-				2075C1E62BB5EAB9004F56D2 /* FilledButtonFactory.swift */,
 				20F370BE2BB89E6700C85341 /* StorageManager.swift */,
 				2075C1D92BB5DACC004F56D2 /* Assets.xcassets */,
 				2075C1DB2BB5DACC004F56D2 /* LaunchScreen.storyboard */,
@@ -144,7 +141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2075C1D82BB5DACA004F56D2 /* TaskList.xcdatamodeld in Sources */,
-				2075C1E72BB5EAB9004F56D2 /* FilledButtonFactory.swift in Sources */,
 				20F370BF2BB89E6700C85341 /* StorageManager.swift in Sources */,
 				2075C1D22BB5DACA004F56D2 /* TaskListViewController.swift in Sources */,
 				2075C1CE2BB5DACA004F56D2 /* AppDelegate.swift in Sources */,

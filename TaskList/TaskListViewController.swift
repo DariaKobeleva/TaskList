@@ -8,56 +8,57 @@
 import UIKit
 
 final class TaskListViewController: UITableViewController {
+    
+    //MARK: - Private Properties
+    private let storageManager = StorageManager.shared
     private var taskList: [ToDoTask] = []
     private let cellID = "task"
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         setupNavigationBar()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        fetchData()
+        tableViewReload()
     }
     
+    //MARK: - Private Methods
     @objc private func addNewTask() {
-        showAlert(with: "New Task", andMessage: "What do you want to do?")
+        showAlert(with: "New Task", andMessage: "What do you want to do?", for: nil)
     }
     
-    private func fetchData() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let fetchRequest = ToDoTask.fetchRequest()
-        
-        do {
-            taskList = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
-        } catch {
-            print(error)
-        }
-    }
-    private func showAlert(with title: String, andMessage message: String) {
+    private func showAlert(with title: String, andMessage message: String, for task: ToDoTask?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { [unowned self ]_ in
-            
-            guard let inputText = alert.textFields?.first?.text, !inputText.isEmpty else { return }
-            save(inputText)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
+        
+        let textFieldText = task?.title ?? ""
+        
         alert.addTextField { textField in
-            textField.placeholder = "New Task"
+            textField.text = textFieldText.isEmpty ? nil : textFieldText
+            textField.placeholder = textFieldText.isEmpty ? "New Task" : nil
         }
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] _ in
+            guard let inputText = alert.textFields?.first?.text, !inputText.isEmpty else { return }
+            if let task = task {
+                storageManager.update(task, withNewTitle: inputText)
+            } else {
+                storageManager.create(inputText)
+            }
+            tableViewReload()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
         present(alert, animated: true)
     }
-    private func save(_ taskName: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let task = ToDoTask(context: appDelegate.persistentContainer.viewContext)
-        task.title = taskName
-        taskList.append(task)
-        
-        let indexPath = IndexPath(row: taskList.count - 1, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
-        
-        appDelegate.saveContext()
+    
+    private func tableViewReload() {
+        taskList = storageManager.fetchData()
+        tableView.reloadData()
     }
 }
 
@@ -76,7 +77,20 @@ extension TaskListViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let task = taskList[indexPath.row]
+            storageManager.delete(task)
+            tableViewReload()
+        }
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let task = taskList[indexPath.row]
+        showAlert(with: "Edit Task", andMessage: "What do you want to do?", for: task)
+    }
 }
+
 //MARK: - Setup UI
 private extension TaskListViewController {
     func setupNavigationBar() {
