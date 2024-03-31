@@ -35,7 +35,6 @@ final class TaskListViewController: UITableViewController {
         let textFieldText = task?.title ?? ""
         
         alert.addTextField { textField in
-            textField.textColor = .darkGray
             textField.text = textFieldText.isEmpty ? nil : textFieldText
             textField.placeholder = textFieldText.isEmpty ? "New Task" : nil
         }
