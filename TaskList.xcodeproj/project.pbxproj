@@ -39,6 +39,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20587B2E2BB9DF2F0008F0E3 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				2075C1DB2BB5DACC004F56D2 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		20587B2F2BB9DF940008F0E3 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2075C1CD2BB5DACA004F56D2 /* AppDelegate.swift */,
+				2075C1CF2BB5DACA004F56D2 /* SceneDelegate.swift */,
+				2075C1DE2BB5DACC004F56D2 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		20587B302BB9DFC00008F0E3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2075C1D12BB5DACA004F56D2 /* TaskListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		20587B312BB9DFE10008F0E3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				20F370BE2BB89E6700C85341 /* StorageManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		20587B322BB9DFFF0008F0E3 /* Sourse */ = {
+			isa = PBXGroup;
+			children = (
+				2075C1D92BB5DACC004F56D2 /* Assets.xcassets */,
+			);
+			path = Sourse;
+			sourceTree = "<group>";
+		};
 		2075C1C12BB5DACA004F56D2 = {
 			isa = PBXGroup;
 			children = (
@@ -58,13 +100,11 @@
 		2075C1CC2BB5DACA004F56D2 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
-				2075C1CD2BB5DACA004F56D2 /* AppDelegate.swift */,
-				2075C1CF2BB5DACA004F56D2 /* SceneDelegate.swift */,
-				2075C1D12BB5DACA004F56D2 /* TaskListViewController.swift */,
-				20F370BE2BB89E6700C85341 /* StorageManager.swift */,
-				2075C1D92BB5DACC004F56D2 /* Assets.xcassets */,
-				2075C1DB2BB5DACC004F56D2 /* LaunchScreen.storyboard */,
-				2075C1DE2BB5DACC004F56D2 /* Info.plist */,
+				20587B2F2BB9DF940008F0E3 /* SupportingFiles */,
+				20587B302BB9DFC00008F0E3 /* ViewControllers */,
+				20587B312BB9DFE10008F0E3 /* Services */,
+				20587B322BB9DFFF0008F0E3 /* Sourse */,
+				20587B2E2BB9DF2F0008F0E3 /* StoryBoards */,
 				2075C1D62BB5DACA004F56D2 /* TaskList.xcdatamodeld */,
 			);
 			path = TaskList;
@@ -289,7 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TaskList/Info.plist;
+				INFOPLIST_FILE = TaskList/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -320,7 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TaskList/Info.plist;
+				INFOPLIST_FILE = TaskList/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;

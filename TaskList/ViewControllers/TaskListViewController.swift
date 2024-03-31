@@ -35,6 +35,7 @@ final class TaskListViewController: UITableViewController {
         let textFieldText = task?.title ?? ""
         
         alert.addTextField { textField in
+            textField.textColor = .darkGray
             textField.text = textFieldText.isEmpty ? nil : textFieldText
             textField.placeholder = textFieldText.isEmpty ? "New Task" : nil
         }
@@ -100,7 +101,7 @@ private extension TaskListViewController {
         // Navigation bar appearance
         let navBarAppearance = UINavigationBarAppearance()
         
-        navBarAppearance.backgroundColor = .milkBlue
+        navBarAppearance.backgroundColor = .milkPink
         
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
